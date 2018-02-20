@@ -18,7 +18,7 @@ export class HeroService {
 
     let heroes: Observable<Hero[]>;
     heroes = of(HEROES);
-    return heroes.delay(3000);
+    return heroes.delay(0);
   }
 
 }
