@@ -1,4 +1,4 @@
-button.goback {
+button {
   font-family: Arial;
   background-color: #eee;
   border: none;
@@ -15,7 +15,7 @@ button:disabled {
   color: #aaa;
   cursor: auto;
 }
-button.goback {
+button {
   color: #888;
   margin-bottom: 12px;
 }
