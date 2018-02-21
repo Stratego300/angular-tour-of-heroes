@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Hero} from './hero';
 import {HEROES} from './mock-heroes';
 import {Observable} from 'rxjs/Observable';
-import {of} from 'rxjs/observable/of';
+import {of, of} from 'rxjs/observable/of';
 import 'rxjs/add/operator/delay';
 import {MessageService} from './message.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -90,5 +90,18 @@ export class HeroService {
       tap(_ => this.log(`deleted hero id=${id}`)),
       catchError(this.handleError<Hero>('deleteHero'))
     );
+  }
+
+  /* GET heroes whose name contains search term */
+  searchHeroes (term: string): Observable<Hero[]> {
+    if ( !term.trim() ) {
+      // empty term => return empty Hero array
+      return of([]);
+    }
+    return this.http.get<Hero[]>(`api/heroes/?name=${term}`).pipe(
+      tap( _ => this.log(`found heroes matching "${term}"`)),
+      catchError(this.handleError<Hero[]>('searchHeroes', []))
+    );
+
   }
 }
